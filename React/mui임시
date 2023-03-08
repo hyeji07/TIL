@@ -1,0 +1,45 @@
+[React] MUI Drawer onMouseEnter 무이 마우스 올렸을 때 setState
+
+MUI Drawer 를 사용 중, Left 왼쪽 메뉴에 고정되어있는 것을 hover시에도 적용시키고 싶을 때 state를 이용하고 싶었다. 
+
+onClick만 있는 줄 알았는데 onMouseEnter, onMouseLeave 도 적용할 수 있었다. (mui에서 hover 로 검색해서 나옴)
+
+
+
+아래와 같은 형식
+
+ onMouseEnter={() => {
+  onOpen();
+  isOnButton.current = true;
+}}
+onMouseLeave={() => {
+  isOnButton.current = false;
+}}
+https://mui.com/joy-ui/react-menu/
+
+React Menu component - Joy UI
+
+Menus display a list of choices on temporary surfaces.
+
+mui.com
+
+
+아래는 MUI 컴포넌트에 적용한 코드이다.
+
+<ListItemButton
+    onClick={handleClick}
+    sx={{
+      minHeight: 48,
+      justifyContent: open ? 'initial' : 'center',
+      px: 2.5,
+    }}
+    selected={selectedIndex === 2}
+    onMouseEnter={() => {
+      !open && setDepthOpen(true);
+    }}
+>
+
+
+참고로 MUI에서 제공되는 함수중
+
+const openedMixin 는 왼쪽 메뉴가 열렸을 경우, const closedMixin 왼쪽 메뉴가 닫혔을 경우에 적용하는 거라 안에 작성하면 css도 적용된다.
